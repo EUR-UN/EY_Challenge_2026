@@ -1,0 +1,39 @@
+name: CI - Code Quality & Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f resources/code/snowflake/requirements.txt ]; then pip install -r resources/code/snowflake/requirements.txt; fi
+        if [ -f resources/code/general/requirements.txt ]; then pip install -r resources/code/general/requirements.txt; fi
+
+    - name: Verify LaTeX Build Environment (Setup Only)
+      run: |
+        # Just verifying that we can install texlive, full build might be too heavy for CI free tier
+        # but we can try a lightweight check
+        sudo apt-get update && sudo apt-get install -y texlive-xetex texlive-fonts-recommended texlive-plain-generic
+
+    - name: Check for Clean Jupyter Notebooks
+      run: |
+        # Basic check to ensure no huge output in notebooks
+        # This is a simple grep, ideally pre-commit hooks handle this
+        echo "Checking for large notebook outputs..."
+        # If any notebook is larger than 5MB, warn
+        find . -name "*.ipynb" -size +5M -print
