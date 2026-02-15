@@ -8,7 +8,6 @@
 
 > **Repository Structure**:
 > - **Upstream (Official)**: `EUR-UN/EY_Challenge_2026`
-> - **Lead Developer**: `yuanweize/EY_Challenge_2026`
 
 ### 📖 Project Overview / 项目概览
 This project aims to develop machine learning models to predict water quality parameters (Total Alkalinity, Electrical Conductance, Dissolved Reactive Phosphorus) in South Africa using satellite imagery and climate data.
