@@ -1,0 +1,17 @@
+
+[Total Alkalinity]
+  -> Spatial CV R2 : 0.0779
+  -> Random CV R2  : 0.4422
+
+[Electrical Conductance]
+  -> Spatial CV R2 : 0.1050
+  -> Random CV R2  : 0.5007
+
+[Dissolved Reactive Phosphorus]
+  -> Spatial CV R2 : 0.0316
+  -> Random CV R2  : 0.4363
+------------------------------------------------------------
+Overall Spatial CV : 0.0715
+Overall Random CV  : 0.4597
+ESTIMATED LB SCORE : 0.2656
+

@@ -7,35 +7,39 @@
 [![Challenge](https://img.shields.io/badge/EY%20Challenge-Official%20Page-blue)](https://challenge.ey.com/challenges/2026-optimizing-clean-water-supply/overview)
 
 ### 📖 Project Overview / 项目概览
-This project aims to develop machine learning models to predict water quality parameters (Total Alkalinity, Electrical Conductance, Dissolved Reactive Phosphorus) in South Africa using satellite imagery and climate data.
+This project aims to develop machine learning models to predict water quality parameters (Total Alkalinity, Electrical Conductance, Dissolved Reactive Phosphorus) in South Africa using satellite imagery and climate data. 
+
+**Current Performance (当前表现)**:
+- **Leaderboard Score**: `0.2570`
+- **Architecture**: Ensembled XGBoost, LightGBM, and CatBoost utilizing pure Microsoft Planetary Computer spectral bands and explicitly engineered remote-sensing water indices (SABI, NDWI, MNDWI, WRI, NDVI).
 
 **Official Website**: [EY Open Science Data Challenge 2026](https://challenge.ey.com/challenges/2026-optimizing-clean-water-supply/overview)
 
-本项目旨在利用卫星图像和气候数据，开发机器学习模型以预测南非地区的水质参数（总碱度、电导率、溶解性反应磷）。
+本项目旨在利用卫星图像和气候数据，开发机器学习模型以预测南非地区的水质参数（总碱度、电导率、溶解性反应磷）。本仓库记录了端到端的模型演进，当前最优单模融合得分已达 `0.2570`。
 
 ### 🚀 Getting Started / 快速开始
 
 #### 1. Documentation / 文档
-Please refer to the detailed **Bilingual Project Manual**:
-👉 [**Project_Documentation.pdf**](doc/dist/) (Located in `doc/dist/`)
+Please refer to the detailed **Bilingual Project Manual** covering the entire optimization journey:
+👉 [**EY_Challenge_2026_Report_v0.6.pdf**](doc/dist/EY_Challenge_2026_Report_v0.6.pdf) (Located in `doc/dist/`)
 
-This manual includes:
--   Challenge Rules & Objectives
--   Step-by-step Setup Guides (Snowflake & Local)
--   Resource Inventory
--   FAQ
-
-#### 2. Development / 开发
+#### 2. Local Environment Setup / 本地环境配置
 1.  **Clone the repo**:
     ```bash
     git clone https://github.com/EUR-UN/EY_Challenge_2026.git
     cd EY_Challenge_2026
     ```
-2.  **Environment Setup**:
-    -   **Snowflake Users**: Run `resources/code/snowflake/snowflake_setup.sql`.
-    -   **Local Users**: `pip install -r resources/code/general/requirements.txt`.
-3.  **Run Benchmarks**:
-    -   Open `resources/code/general/Benchmark_Model_Notebook.ipynb`.
+2.  **Install Python Dependencies**:
+    ```bash
+    pip install -r resources/code/general/requirements.txt
+    pip install xgboost lightgbm catboost optuna pystac-client odc-stac scikit-learn pandas numpy
+    ```
+
+#### 3. Core Pipeline / 核心流水线
+The project has evolved far beyond the official baseline notebook into a modular Python pipeline:
+- **Data Fetching**: `python src/data/fetch_planetary_data.py` (Downloads pristine coordinates from MS Planetary Computer)
+- **Model Training**: `python src/models/ensemble_model.py` (Trains the Gradient Boosting ensemble)
+- **Local Validation**: `python src/evaluation/evaluate_local.py` (Calculates Spatial K-Fold CV mapped to the LB)
 
 ### 📂 Directory Structure / 目录结构
 ```
