@@ -28,6 +28,6 @@ all: clean
 
 clean:
 	@echo "Cleaning up build artifacts..."
-	rm -rf $(OUT_DIR)/*.pdf $(OUT_DIR)/*.aux $(OUT_DIR)/*.log $(OUT_DIR)/*.toc $(OUT_DIR)/*.out $(OUT_DIR)/*.fls $(OUT_DIR)/*.fdb_latexmk
+	rm -rf $(OUT_DIR)/*
 	@echo "Cleaning up root directory artifacts..."
 	rm -f *.aux *.log *.toc *.out *.fls *.fdb_latexmk *.synctex.gz
