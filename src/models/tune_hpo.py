@@ -18,6 +18,8 @@ optuna.logging.set_verbosity(optuna.logging.WARNING)
 # Paths & Config
 # ---------------------------------------------------------------------------
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'output')
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 # We can re-use the exact preprocessing from ensemble_model
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -179,7 +181,7 @@ def run_hpo_pipeline():
         
     print("\n[3/3] Optuna Search Complete. Writing optimal parameters to disk...")
     # Save optimized params so ensemble_model can read them
-    param_path = os.path.join(os.path.dirname(__file__), 'best_optuna_params.joblib')
+    param_path = os.path.join(OUTPUT_DIR, 'best_optuna_params.joblib')
     joblib.dump(best_params_dict, param_path)
     print(f"Saved optimized hyperparameters to {param_path}")
 

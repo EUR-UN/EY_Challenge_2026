@@ -28,7 +28,6 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r resources/code/general/requirements.txt
-        pip install xgboost lightgbm catboost optuna pystac-client odc-stac scikit-learn pandas numpy
 
     - name: Run Local Evaluation
       run: |
@@ -36,10 +35,8 @@ jobs:
         python src/evaluation/evaluate_local.py > output/new_baseline_scores.txt
         cat output/new_baseline_scores.txt
 
-    - name: Commit and Push results
-      if: github.event_name == 'push'
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add output/new_baseline_scores.txt
-        git diff --quiet && git diff --staged --quiet || (git commit -m "chore: updated local evaluation metrics [skip ci]" && git push)
+    - name: Upload Local Evaluation Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: local-evaluation-metrics
+        path: output/new_baseline_scores.txt

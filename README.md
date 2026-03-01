@@ -39,7 +39,7 @@ Please refer to the detailed **Bilingual Project Manual** covering the entire op
 
 #### 3. Core Pipeline / 核心流水线
 The project has evolved far beyond the official baseline notebook into a modular Python pipeline:
-- **Data Fetching**: `python src/data/fetch_planetary_data.py` (Downloads pristine coordinates from MS Planetary Computer)
+- **Data Fetching**: `python src/data/fetch_planetary_data.py` (Downloads pristine optical bands and cloud masks from MS Planetary Computer)
 - **Model Training**: `python src/models/ensemble_model.py` (Trains the Gradient Boosting ensemble)
 - **Local Validation**: `python src/evaluation/evaluate_local.py` (Calculates Spatial K-Fold CV mapped to the LB)
 

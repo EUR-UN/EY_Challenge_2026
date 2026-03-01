@@ -130,7 +130,7 @@ def cross_validate_and_train_ensemble(df, feature_cols, target_col):
     cat_params = {'iterations': 400, 'learning_rate': 0.05, 'depth': 6, 'random_seed': RANDOM_STATE, 'verbose': False, 'allow_writing_files': False}
     
     # Check if Optuna HPO completed and load optimal params if available
-    param_path = os.path.join(os.path.dirname(__file__), 'best_optuna_params.joblib')
+    param_path = os.path.join(OUTPUT_DIR, 'best_optuna_params.joblib')
     if os.path.exists(param_path):
         import joblib
         best_params_dict = joblib.load(param_path)
