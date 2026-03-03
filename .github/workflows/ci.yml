@@ -57,7 +57,7 @@ jobs:
 
   # ── Documentation build ─────────────────────────────────────
   docs:
-    name: Build documentation PDF
+    name: LaTeX environment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
