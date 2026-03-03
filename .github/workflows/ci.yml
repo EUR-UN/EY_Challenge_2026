@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   # ── Python lint & import check ──────────────────────────────
@@ -91,25 +91,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: docs
     if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install TeX Live (LuaLaTeX + CJK)
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends \
-            make \
-            texlive-luatex \
-            texlive-lang-chinese \
-            texlive-latex-extra \
-            texlive-fonts-recommended \
-            texlive-plain-generic
-
-      - name: Build docs for release asset
-        run: |
-          cd doc
-          make
+      - name: Download documentation artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: EY_Challenge_2026_Report
+          path: doc/dist
 
       - name: Upload PDF to GitHub Release
         uses: softprops/action-gh-release@v2
